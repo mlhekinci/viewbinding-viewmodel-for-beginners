@@ -15,11 +15,15 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.textView.text = viewModel.number.toString()
+        viewModel.numberCounter.observe(
+            this,
+            { number ->
+                binding.textView.text = number.toString()
+            }
+        )
 
         binding.addButton.setOnClickListener {
             viewModel.addNumber()
-            binding.textView.text = viewModel.number.toString()
         }
     }
 }
